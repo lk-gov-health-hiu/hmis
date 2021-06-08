@@ -8,6 +8,7 @@ package com.divudi.bean.common;
 import com.divudi.bean.rest.NewJerseyClient;
 import com.divudi.entity.Institution;
 import com.divudi.facade.InstitutionFacade;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,17 +68,19 @@ public class InstitutionApplicationController {
             System.out.println("o = " + o);
             if (o instanceof JSONObject) {
                 JSONObject jo = ((JSONObject) o);
-                String id = jo.getString("institute_id");
-                String code = jo.getString("institute_code");
                 String name = jo.getString("name");
                 String hin = jo.getString("hin");
                 String address = jo.getString("address");
+                System.out.println("jo = " + jo);
+                BigInteger id = jo.getBigInteger("institute_id");
+                String code = jo.getString("institute_code");
+
                 String type = jo.getString("type");
 
                 Long coreId;
 
                 try {
-                    coreId = Long.parseLong(id);
+                    coreId = id.longValue();
                 } catch (Exception e) {
                     System.out.println("e = " + e);
                     continue;
