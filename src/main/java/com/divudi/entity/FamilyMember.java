@@ -5,7 +5,7 @@
  */
 package com.divudi.entity;
 
-import com.divudi.data.hr.Relationship;
+import com.divudi.data.hr.RelationshipHr;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;

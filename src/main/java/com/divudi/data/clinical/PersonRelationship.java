@@ -5,7 +5,7 @@
  */
 package com.divudi.data.clinical;
 
-import com.divudi.data.hr.Relationship;
+import com.divudi.data.hr.RelationshipHr;
 import com.divudi.entity.Person;
 import com.divudi.entity.WebUser;
 import java.io.Serializable;
@@ -36,7 +36,7 @@ public class PersonRelationship implements Serializable {
     @ManyToOne
     Person bperson;
     @Enumerated(EnumType.STRING)
-    Relationship apToBpRelationship;
+    RelationshipHr apToBpRelationship;
     int orderNo;
     //Created Properties
     @ManyToOne
@@ -131,11 +131,11 @@ public class PersonRelationship implements Serializable {
         this.id = id;
     }
 
-    public Relationship getApToBpRelationship() {
+    public RelationshipHr getApToBpRelationship() {
         return apToBpRelationship;
     }
 
-    public void setApToBpRelationship(Relationship apToBpRelationship) {
+    public void setApToBpRelationship(RelationshipHr apToBpRelationship) {
         this.apToBpRelationship = apToBpRelationship;
     }
     

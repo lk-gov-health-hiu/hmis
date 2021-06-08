@@ -9,7 +9,7 @@ package com.divudi.data.hr;
  *
  * @author buddhika
  */
-public enum Relationship {
+public enum RelationshipHr {
     ParentToChild,
     ChildToParent,
     SublingToSubling,

@@ -40,6 +40,8 @@ public class Category implements Serializable {
     String tName;
     String sName;
     String description;
+    private Long coreAppId;
+    private String strType;
     int orderNo;
     //Created Properties
     @ManyToOne
@@ -303,6 +305,8 @@ public class Category implements Serializable {
         return institution;
     }
 
+    
+    
     public void setInstitution(Institution institution) {
         this.institution = institution;
     }
@@ -313,6 +317,22 @@ public class Category implements Serializable {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public Long getCoreAppId() {
+        return coreAppId;
+    }
+
+    public void setCoreAppId(Long coreAppId) {
+        this.coreAppId = coreAppId;
+    }
+
+    public String getStrType() {
+        return strType;
+    }
+
+    public void setStrType(String strType) {
+        this.strType = strType;
     }
 
     

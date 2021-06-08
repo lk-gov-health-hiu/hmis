@@ -31,6 +31,7 @@ public class Department implements Serializable {
     //Main Properties   
     Long id;
     String departmentCode;
+    private Long coreAppId;
     String name;
     String sName;
     String tName;
@@ -51,6 +52,9 @@ public class Department implements Serializable {
     @ManyToOne
     Department labDepartment;
 
+    private String code;
+    private String strType;
+    
     @ManyToOne
     Institution sampleInstitution;
     @ManyToOne
@@ -322,4 +326,31 @@ public class Department implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Long getCoreAppId() {
+        return coreAppId;
+    }
+
+    public void setCoreAppId(Long coreAppId) {
+        this.coreAppId = coreAppId;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getStrType() {
+        return strType;
+    }
+
+    public void setStrType(String strType) {
+        this.strType = strType;
+    }
+    
+    
+    
 }

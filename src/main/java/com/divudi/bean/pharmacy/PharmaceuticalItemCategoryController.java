@@ -62,6 +62,27 @@ public class PharmaceuticalItemCategoryController implements Serializable {
         return pharmaceuticalItemCategoryList;
     }
 
+    public PharmaceuticalItemCategory findCategory(Long coreAppId) {
+        Map m = new HashMap();
+        m.put("caid", coreAppId);
+        String sql = "select c from PharmaceuticalItemCategory c where "
+                + " c.retired=false and "
+                + " c.coreAppId=:caid";
+        return getFacade().findFirstBySQL(sql, m);
+    }
+
+    public void save(PharmaceuticalItemCategory c) {
+        if (c == null) {
+            System.out.println("Nothing to save");
+            return;
+        }
+        if(c.getId()==null){
+            getFacade().create(c);
+        }else{
+            getFacade().edit(c);
+        }
+    }
+
     public void prepareAdd() {
         current = new PharmaceuticalItemCategory();
     }

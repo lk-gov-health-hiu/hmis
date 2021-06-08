@@ -132,6 +132,31 @@ public class PharmaceuticalItemTypeController implements Serializable {
         return ejbFacade;
     }
 
+    public void save(PharmaceuticalItemType p) {
+        if (p == null) {
+            System.out.println("Nothing to save");
+            return;
+        }
+        if (p.getId() == null) {
+            getFacade().create(p);
+        } else {
+            getFacade().edit(p);
+        }
+
+    }
+
+    public PharmaceuticalItemType getItemByCoreAppId(Long id) {
+        String j;
+        j = "select t "
+                + " from PharmaceuticalItemType t "
+                + " where t.retired=false "
+                + " and t.coreAppId=:caid";
+        items = getFacade().findBySQL(j);
+        Map m = new HashMap();
+        m.put("caid", id);
+        return getFacade().findFirstBySQL(j, m);
+    }
+
     public List<PharmaceuticalItemType> getItems() {
         if (items == null) {
             String j;

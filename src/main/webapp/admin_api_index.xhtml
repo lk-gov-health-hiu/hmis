@@ -3,26 +3,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:body>
         <ui:composition template="/resources/template/template.xhtml">
             <ui:define name="content">
                 <h:form>
-                    <h:panelGrid columns="3" columnClasses="grid1 grid1">
-                        <p:panel header="Manage API"  rendered="#{webUserController.hasPrivilege('AdminItems')}" >
-                            <h:panelGrid columns="1" >
-                                <p:commandButton styleClass="linkButton" ajax="false" value="Get Institution List from Core Application" 
-                                                 action="#{institutionApplicationController.executeCoreInstitutionListRestRequest}" />
-                                
-                                <p:inputTextarea value="#{institutionApplicationController.response}" ></p:inputTextarea>
-                            </h:panelGrid>
-                        </p:panel>
+                    <h:panelGrid columns="1" rendered="#{webUserController.hasPrivilege('AdminItems')}" style="width: 100%;" >
+                        <f:facet name="header" >
+                            <p:outputLabel value="Manage APIs" ></p:outputLabel>
+                        </f:facet>
+                        <p:commandButton styleClass="linkButton" ajax="false" value="Get Dosage froms from Core Application" 
+                                         action="#{apiApplicationController.executeDosageFormRestRequest()}" />
+                        <p:commandButton styleClass="linkButton" ajax="false" value="Get Institution List from Core Application" 
+                                         action="#{apiApplicationController.executeCoreInstitutionListRestRequest}" />
+
+                        <p:inputTextarea value="#{apiApplicationController.response}" style="width: 90%; height: 500px;" ></p:inputTextarea>
                     </h:panelGrid>
-
-
                 </h:form>
             </ui:define>
         </ui:composition>
+<!--        STRTYPE
+        COREAPPID
+        CODE-->
     </h:body>
 </html>
