@@ -88,7 +88,7 @@ public class VtmController implements Serializable {
         if (v.getId() == null) {
             getFacade().create(v);
         } else {
-            getFacade().create(v);
+            getFacade().edit(v);
         }
     }
 

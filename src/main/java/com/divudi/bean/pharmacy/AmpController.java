@@ -98,7 +98,7 @@ public class AmpController implements Serializable {
         if (v.getId() == null) {
             getFacade().create(v);
         } else {
-            getFacade().create(v);
+            getFacade().edit(v);
         }
     }
 
