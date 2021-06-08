@@ -7,6 +7,7 @@
  * a Set of Related Tools
  */
 package com.divudi.bean.pharmacy;
+
 import com.divudi.bean.common.BillBeanController;
 import com.divudi.bean.common.SessionController;
 import com.divudi.bean.common.UtilityController;
@@ -17,11 +18,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext; import javax.faces.convert.Converter;
+import javax.faces.context.FacesContext;
+import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -29,11 +33,11 @@ import javax.inject.Named;
 /**
  *
  * @author Dr. M. H. B. Ariyaratne, MBBS, PGIM Trainee for MSc(Biomedical
- Informatics)
+ * Informatics)
  */
 @Named
 @SessionScoped
-public  class VtmController implements Serializable {
+public class VtmController implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Inject
@@ -54,7 +58,7 @@ public  class VtmController implements Serializable {
     List<Vtm> vtmList;
 
     public List<Vtm> completeVtm(String query) {
-        
+
         String sql;
         if (query == null) {
             vtmList = new ArrayList<Vtm>();
@@ -64,6 +68,28 @@ public  class VtmController implements Serializable {
             vtmList = getFacade().findBySQL(sql);
         }
         return vtmList;
+    }
+
+    public Vtm getByCoreAppId(Long id) {
+        String sql;
+        sql = "select c "
+                + " from Vtm c "
+                + " where c.retired=false "
+                + " and c.coreAppId=:id";
+        Map m = new HashMap();
+        m.put("id", id);
+        return getFacade().findFirstBySQL(sql, m);
+    }
+
+    public void save(Vtm v) {
+        if (v == null) {
+            System.out.println("Nothing to save");
+        }
+        if (v.getId() == null) {
+            getFacade().create(v);
+        } else {
+            getFacade().create(v);
+        }
     }
 
     public boolean isBilledAs() {
@@ -124,13 +150,13 @@ public  class VtmController implements Serializable {
     }
 
     public List<Vtm> getSelectedItems() {
-         
+
         if (selectText.trim().equals("")) {
             selectedItems = getFacade().findBySQL("select c from Vtm c where c.retired=false order by c.name");
         } else {
             String sql = "select c from Vtm c where c.retired=false and upper(c.name) like '%" + getSelectText().toUpperCase() + "%' order by c.name";
             selectedItems = getFacade().findBySQL(sql);
-            
+
         }
         return selectedItems;
     }
@@ -150,13 +176,10 @@ public  class VtmController implements Serializable {
                 String f = w.get(4);
                 //////System.out.println(code + " " + ix + " " + ic + " " + f);
 
-
                 Vtm tix = new Vtm();
                 tix.setCode(code);
                 tix.setName(ix);
                 tix.setDepartment(null);
-
-
 
             } catch (Exception e) {
             }
@@ -288,7 +311,6 @@ public  class VtmController implements Serializable {
     /**
      *
      */
-   
     @FacesConverter("vtm")
     public static class VtmControllerConverter implements Converter {
 

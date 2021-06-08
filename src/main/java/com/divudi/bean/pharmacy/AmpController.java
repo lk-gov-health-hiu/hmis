@@ -79,6 +79,30 @@ public class AmpController implements Serializable {
     @Inject
     ItemsDistributorsController itemDistributorsController;
 
+    
+    public Amp getByCoreAppId(Long id) {
+        String sql;
+        sql = "select c "
+                + " from Amp c "
+                + " where c.retired=false "
+                + " and c.coreAppId=:id";
+        Map m = new HashMap();
+        m.put("id", id);
+        return getFacade().findFirstBySQL(sql, m);
+    }
+
+    public void save(Amp v) {
+        if (v == null) {
+            System.out.println("Nothing to save");
+        }
+        if (v.getId() == null) {
+            getFacade().create(v);
+        } else {
+            getFacade().create(v);
+        }
+    }
+
+    
     public void fillItemsForItemSupplierPrices() {
         Date startTime = new Date();
         Date fromDate = null;

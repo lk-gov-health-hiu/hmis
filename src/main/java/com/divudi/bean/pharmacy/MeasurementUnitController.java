@@ -9,11 +9,14 @@
 package com.divudi.bean.pharmacy;
 import com.divudi.bean.common.SessionController;
 import com.divudi.bean.common.UtilityController;
+import com.divudi.entity.pharmacy.Amp;
 import com.divudi.entity.pharmacy.MeasurementUnit;
 import com.divudi.facade.MeasurementUnitFacade;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -41,7 +44,30 @@ public  class MeasurementUnitController implements Serializable {
     private List<MeasurementUnit> items = null;
     String selectText = "";
 
-   
+
+    public MeasurementUnit getByCoreAppId(Long id) {
+        String sql;
+        sql = "select c "
+                + " from MeasurementUnit c "
+                + " where c.retired=false "
+                + " and c.coreAppId=:id";
+        Map m = new HashMap();
+        m.put("id", id);
+        return getFacade().findFirstBySQL(sql, m);
+    }
+
+    public void save(MeasurementUnit v) {
+        if (v == null) {
+            System.out.println("Nothing to save");
+        }
+        if (v.getId() == null) {
+            getFacade().create(v);
+        } else {
+            getFacade().create(v);
+        }
+    }
+
+    
     public void prepareAdd() {
         current = new MeasurementUnit();
     }

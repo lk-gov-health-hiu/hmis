@@ -11,6 +11,7 @@ package com.divudi.bean.pharmacy;
 import com.divudi.bean.common.BillBeanController;
 import com.divudi.bean.common.SessionController;
 import com.divudi.bean.common.UtilityController;
+import com.divudi.entity.pharmacy.Amp;
 import com.divudi.entity.pharmacy.Vmp;
 import com.divudi.entity.pharmacy.VtmsVmps;
 import com.divudi.facade.SpecialityFacade;
@@ -20,7 +21,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -63,6 +66,31 @@ public class VmpController implements Serializable {
 
     List<Vmp> vmpList;
 
+    
+    
+    public Vmp getByCoreAppId(Long id) {
+        String sql;
+        sql = "select c "
+                + " from Vmp c "
+                + " where c.retired=false "
+                + " and c.coreAppId=:id";
+        Map m = new HashMap();
+        m.put("id", id);
+        return getFacade().findFirstBySQL(sql, m);
+    }
+
+    public void save(Vmp v) {
+        if (v == null) {
+            System.out.println("Nothing to save");
+        }
+        if (v.getId() == null) {
+            getFacade().create(v);
+        } else {
+            getFacade().create(v);
+        }
+    }
+
+    
     public List<Vmp> completeVmp(String query) {
 
         String sql;

@@ -150,8 +150,7 @@ public class PharmaceuticalItemTypeController implements Serializable {
         j = "select t "
                 + " from PharmaceuticalItemType t "
                 + " where t.retired=false "
-                + " and t.coreAppId=:caid";
-        items = getFacade().findBySQL(j);
+                + " and t.coreAppId=:caid ";
         Map m = new HashMap();
         m.put("caid", id);
         return getFacade().findFirstBySQL(j, m);

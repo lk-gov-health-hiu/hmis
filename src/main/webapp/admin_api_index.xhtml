@@ -15,9 +15,9 @@
                             <p:outputLabel value="Manage APIs" ></p:outputLabel>
                         </f:facet>
                         <p:commandButton styleClass="linkButton" ajax="false" value="Get Dosage froms from Core Application" 
-                                         action="#{apiApplicationController.executeDosageFormRestRequest()}" />
+                                         action="#{apiApplicationController.fillMedicineAndUnits()}" />
                         <p:commandButton styleClass="linkButton" ajax="false" value="Get Institution List from Core Application" 
-                                         action="#{apiApplicationController.executeCoreInstitutionListRestRequest}" />
+                                         action="#{apiApplicationController.fillDepartments}" />
 
                         <p:inputTextarea value="#{apiApplicationController.response}" style="width: 90%; height: 500px;" ></p:inputTextarea>
                     </h:panelGrid>

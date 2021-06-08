@@ -70,6 +70,9 @@ public class Item implements Serializable, Comparable<Item> {
     Long id;
     int orderNo;
 
+    private Long coreAppId;
+    private String strType;
+    
     @ManyToOne
     Category category;
     Double total = 0.0;
@@ -946,6 +949,8 @@ public class Item implements Serializable, Comparable<Item> {
     public Date getEditedAt() {
         return editedAt;
     }
+    
+    
 
     public void setEditedAt(Date editedAt) {
         this.editedAt = editedAt;
@@ -1133,6 +1138,22 @@ public class Item implements Serializable, Comparable<Item> {
 
     public void setTransCodeFromName(String transCodeFromName) {
         this.transCodeFromName = transCodeFromName;
+    }
+
+    public Long getCoreAppId() {
+        return coreAppId;
+    }
+
+    public void setCoreAppId(Long coreAppId) {
+        this.coreAppId = coreAppId;
+    }
+
+    public String getStrType() {
+        return strType;
+    }
+
+    public void setStrType(String strType) {
+        this.strType = strType;
     }
 
     static class ReportItemComparator implements Comparator<ReportItem> {
