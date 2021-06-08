@@ -47,7 +47,10 @@ public class Institution implements Serializable, IdentifiableWithNameOrCode {
     Long id;
     String institutionCode;
     String name;
+    private Long coreAppId;
     private String code;
+    private String strType;
+    private String hin;
     String address;
     String fax;
     String email;
@@ -57,6 +60,8 @@ public class Institution implements Serializable, IdentifiableWithNameOrCode {
     String web;
     String chequePrintingName;
 
+    private Institution parent;
+    
     @Lob
     String labBillHeading;
     @Lob
@@ -626,6 +631,39 @@ public class Institution implements Serializable, IdentifiableWithNameOrCode {
         this.ownerEmail = ownerEmail;
     }
 
+    public Long getCoreAppId() {
+        return coreAppId;
+    }
+
+    public void setCoreAppId(Long coreAppId) {
+        this.coreAppId = coreAppId;
+    }
+
+    public String getStrType() {
+        return strType;
+    }
+
+    public void setStrType(String strType) {
+        this.strType = strType;
+    }
+
+    public Institution getParent() {
+        return parent;
+    }
+
+    public void setParent(Institution parent) {
+        this.parent = parent;
+    }
+
+    public String getHin() {
+        return hin;
+    }
+
+    public void setHin(String hin) {
+        this.hin = hin;
+    }
+
+    
     
     
 }
