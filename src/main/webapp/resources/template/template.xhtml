@@ -8,6 +8,24 @@
     <h:head class="">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
+        <link href="https://fonts.googleapis.com/css?family=Poppins;display=swap" rel="stylesheet"></link>
+        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' 
+              integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' 
+              crossorigin='anonymous'></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+        <script async="true" src="https://www.googletagmanager.com/gtag/js?id=G-VFXVJY37FG"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'G-VFXVJY37FG');
+        </script>
+
         <ui:insert name="title"   >
             <title>
                 <h:panelGroup rendered="#{sessionController.logged}" >
@@ -18,43 +36,30 @@
                     <h:outputText value="#{sessionController.loggedUser.webUserPerson.name}" ></h:outputText>
                 </h:panelGroup>
                 <h:panelGroup rendered="#{!sessionController.logged}" >
-                    <h:outputText value="Hospital Information Management System" ></h:outputText>
+                    <h:outputText value="Pharmacy Information Management System" ></h:outputText>
                 </h:panelGroup>
             </title>
         </ui:insert>
+        <h:outputStylesheet library="css" name="tem1.css"/>
         <h:outputStylesheet library="css" name="maincss.css" />
         <h:outputStylesheet library="css" name="css1.css" />
         <h:outputStylesheet library="css" name="summery.css" />
         <h:outputStylesheet library="css" name="printing.css" />
         <h:outputStylesheet library="awesome" name="css/font-awesome.css" ></h:outputStylesheet>
         <h:outputScript library="js" name="jsfcrud.js"/>
-        
-                <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async="true" src="https://www.googletagmanager.com/gtag/js?id=UA-167559394-1"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-
-            gtag('config', 'UA-167559394-1');
-        </script>
-        
     </h:head>
 
-    <h:body>
-        
+    <h:body  style="font-family: 'Poppins', sans-serif!important;">
+
         <h:panelGroup rendered="false" >
-             <h1>Site will be down for maintainance.</h1>
+            <h1>Site will be down for maintainance.</h1>
         </h:panelGroup>
-       
-        
-        
+
+
         <div id="panelFullSpread" class="fullSpread ui-widget-content "  >
 
-            
-            
+
+
             <p:growl id="publicGrowl"    />
             <h:panelGroup >
                 <h:form>
@@ -180,10 +185,10 @@
 
 
             </h:panelGrid>
-            
+
             <div style="height: 50px" class="nonPrintBlock" >
             </div>
-            
+
             <ez:footer/>
 
         </div>
