@@ -40,6 +40,17 @@ public  class PersonController implements Serializable {
     private List<Person> items = null;
     String selectText = "";
 
+    public void save(Person p){
+        if(p==null){
+            return;
+        }
+        if(p.getId()==null){
+            getFacade().create(p);
+        }else{
+            getFacade().edit(p);
+        }
+    }
+    
     public List<Person> getSelectedItems() {
         selectedItems = getFacade().findBySQL("select c from Person c where c.retired=false and upper(c.name) like '%" + getSelectText().toUpperCase() + "%' order by c.name");
         return selectedItems;

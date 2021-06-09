@@ -382,7 +382,7 @@ public class ApiApplicationController {
 
     public void fillPendingPrescriptions() {
         NewJerseyClient newJerseyClient = new NewJerseyClient();
-        response = newJerseyClient.getJson("", "", "get_medicines_and_units_list", "", "");
+        response = newJerseyClient.getJson("", "", "get_prescriptions_pending", "", "");
         newJerseyClient.close();
         JSONObject jSONObjectOut = new JSONObject(response);
         JSONArray array = jSONObjectOut.getJSONArray("data");
@@ -395,6 +395,7 @@ public class ApiApplicationController {
                 b.setBillType(BillType.PharmacyPrescription);
                 b.setFromDepartment(departmentController.getByCoreAppId(p.getInstitutionId()));
                 b.setBillDate(new Date());
+                b.setCreatedAt(new Date());
                 Person person = new Person();
                 person.setName(p.getName());
                 Calendar cdob = Calendar.getInstance();

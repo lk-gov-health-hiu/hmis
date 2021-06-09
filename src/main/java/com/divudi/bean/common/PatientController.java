@@ -130,6 +130,17 @@ public class PatientController implements Serializable {
 
     private String searchText;
 
+    public void save(Patient p) {
+        if (p == null) {
+            return;
+        }
+        if (p.getId() == null) {
+            getFacade().create(p);
+        } else {
+            getFacade().edit(p);
+        }
+    }
+
     public String toChangeMembershipOfSelectedPersons() {
         items = new ArrayList<>();
         return "/membership/change_membership";
@@ -632,8 +643,6 @@ public class PatientController implements Serializable {
 //            return;
 //        }
 
-        
-
         if (p.getPerson().getId() == null) {
             p.getPerson().setCreatedAt(Calendar.getInstance().getTime());
             p.getPerson().setCreater(getSessionController().getLoggedUser());
@@ -669,13 +678,13 @@ public class PatientController implements Serializable {
             getFacade().edit(p);
             UtilityController.addSuccessMessage("Updated the patient details successfully.");
         }
-        
+
         if (password != null) {
             p.getPerson().getWebUser().setWebUserPassword(securityController.hash(password));
-            
-            password=null;
+
+            password = null;
         }
-        
+
         getPersonFacade().edit(p.getPerson());
         getWebUserFacade().edit(p.getPerson().getWebUser());
         getPersonFacade().flush();
@@ -1150,8 +1159,6 @@ public class PatientController implements Serializable {
     public WebUserFacade getWebUserFacade() {
         return webUserFacade;
     }
-    
-    
 
     /**
      *
@@ -1297,8 +1304,6 @@ public class PatientController implements Serializable {
         this.currentRelation = currentRelation;
     }
 
-    
-    
     @FacesConverter("patientConverter")
     public static class PatientConverter implements Converter {
 
