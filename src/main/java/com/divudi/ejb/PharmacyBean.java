@@ -1193,7 +1193,7 @@ public class PharmacyBean {
         name = name.replaceAll("\'", "");
         name = name.replaceAll("\"", "");
         String j = "SELECT c FROM PharmaceuticalItemCategory c Where upper(c.name)=:name ";
-        
+
         try {
             cat = getPharmaceuticalItemCategoryFacade().findFirstBySQL(j, m);
         } catch (Exception e) {
@@ -1231,16 +1231,14 @@ public class PharmacyBean {
         String j = "SELECT c FROM PharmaceuticalItemType c Where upper(c.name) = :n";
         Map m = new HashMap();
         m.put("n", name.trim().toUpperCase());
-        try{
-             cat = pharmaceuticalItemTypeFacade.findFirstBySQL(j,m);
-        
-        }catch(Exception e){
+        try {
+            cat = pharmaceuticalItemTypeFacade.findFirstBySQL(j, m);
+
+        } catch (Exception e) {
             return null;
         }
-        
-        
-        
-       if (cat == null && createNew == true) {
+
+        if (cat == null && createNew == true) {
             cat = new PharmaceuticalItemType();
             cat.setName(name);
             pharmaceuticalItemTypeFacade.create(cat);
@@ -1437,6 +1435,39 @@ public class PharmacyBean {
         }
         v.getVmp().setRetired(false);
         return v.getVmp();
+    }
+
+    public void createVtmsForVmp(Vmp vmp, Vtm vtm, double strength, MeasurementUnit strengthUnit, MeasurementUnit issueUnit) {
+        String sql;
+        if (vmp == null || vtm == null || strength == 0 || strengthUnit == null) {
+            return;
+        }
+        Map m = new HashMap();
+        m.put("vtm", vtm);
+        m.put("s", strength);
+        m.put("su", strengthUnit);
+        m.put("vmp", vmp);
+        sql = "select v "
+                + " from VtmsVmps v "
+                + " where v.vtm=:vtm "
+                + " and v.strength=:s "
+                + " and v.strengthUnit=:su "
+                + " and v.issueUnit=:su "
+                + " and v.vmp=:vmp";
+        VtmsVmps v = getVtmsVmpsFacade().findFirstBySQL(sql, m);
+        if (v == null) {
+            v = new VtmsVmps();
+            v.setCreatedAt(Calendar.getInstance().getTime());
+            v.setStrength(strength);
+            v.setStrengthUnit(strengthUnit);
+            v.setVtm(vtm);
+            v.setVmp(vmp);
+            v.setIssueUnit(issueUnit);
+            getVtmsVmpsFacade().create(v);
+        } else {
+            v.setRetired(false);
+            getVtmsVmpsFacade().edit(v);
+        }
     }
 
     public Vtm getVtmByName(String name, boolean createNew) {

@@ -44,7 +44,6 @@ public  class MeasurementUnitController implements Serializable {
     private List<MeasurementUnit> items = null;
     String selectText = "";
 
-
     public MeasurementUnit getByCoreAppId(Long id) {
         String sql;
         sql = "select c "

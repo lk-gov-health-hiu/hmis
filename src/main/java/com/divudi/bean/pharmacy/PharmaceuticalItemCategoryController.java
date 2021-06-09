@@ -62,7 +62,7 @@ public class PharmaceuticalItemCategoryController implements Serializable {
         return pharmaceuticalItemCategoryList;
     }
 
-    public PharmaceuticalItemCategory findCategory(Long coreAppId) {
+    public PharmaceuticalItemCategory getByCoreAppId(Long coreAppId) {
         Map m = new HashMap();
         m.put("caid", coreAppId);
         String sql = "select c from PharmaceuticalItemCategory c where "

@@ -174,11 +174,51 @@ public class BillController implements Serializable {
     //Print Last Bill
     Bill billPrint;
     List<Bill> billsPrint;
+    List<Bill> prscriptions;
     private List<BillComponent> lstBillComponentsPrint;
     private List<BillFee> lstBillFeesPrint;
     private List<BillItem> lstBillItemsPrint;
     private List<BillEntry> lstBillEntriesPrint;
     BillType billType;
+
+    public String toListPrescription() {
+        return "/pharmacy/list-prescriptions";
+    }
+
+    public void listPrescriptions() {
+        String j = "select b "
+                + " from Bill b "
+                + " where b.billType=:bt "
+                + " and b.billDate between :fd and :td "
+                + " order by b.id desc";
+
+        Map m = new HashMap();
+        m.put("bt", BillType.PharmacyPrescription);
+        m.put("fd", getFromDate());
+        m.put("bt", getToDate());
+        prscriptions = getFacade().findBySQL(j, m);
+    }
+
+    
+    
+    public List<Bill> getPrscriptions() {
+        return prscriptions;
+    }
+
+    public void setPrscriptions(List<Bill> prscriptions) {
+        this.prscriptions = prscriptions;
+    }
+
+    public void save(Bill b) {
+        if (b == null) {
+            return;
+        }
+        if (b.getId() == null) {
+            getFacade().create(b);
+        } else {
+            getFacade().edit(b);
+        }
+    }
 
     public BillType getBillType() {
         return billType;
@@ -1200,7 +1240,6 @@ public class BillController implements Serializable {
         //System.out.println("roundOff(b.getVatPlusNetTotal()) = " + roundOff(b.getVatPlusNetTotal()));
         //System.out.println("billItemVatPlusNetValue = " + billItemVatPlusNetValue);
         //System.out.println("roundOff(billItemVatPlusNetValue) = " + roundOff(billItemVatPlusNetValue));
-
         if (billItemTotal != b.getTotal() || billItemDiscount != b.getDiscount() || billItemNetTotal != b.getNetTotal() || roundOff(billItemVatPlusNetValue) != roundOff(b.getVatPlusNetTotal())) {
             return true;
         }
@@ -1213,11 +1252,9 @@ public class BillController implements Serializable {
 
         //System.out.println("b.getVatPlusNetTotal() = " + b.getVatPlusNetTotal());
         //System.out.println("billItemVatPlusNetValue = " + roundOff(billItemVatPlusNetValue));
-
         if (billFeeTotal != b.getTotal() || billFeeDiscount != b.getDiscount() || billFeeNetTotal != b.getNetTotal() || roundOff(billItemVatPlusNetValue) != roundOff(b.getVatPlusNetTotal())) {
             return true;
         }
-
 
         return false;
     }
@@ -1800,7 +1837,6 @@ public class BillController implements Serializable {
 
         MembershipScheme membershipScheme = membershipSchemeController.fetchPatientMembershipScheme(getSearchedPatient(), getSessionController().getApplicationPreference().isMembershipExpires());
 
-
         for (BillEntry be : getLstBillEntries()) {
             //////System.out.println("bill item entry");
             double entryGross = 0.0;
@@ -1860,7 +1896,6 @@ public class BillController implements Serializable {
 
             //System.out.println("item is = " + bi.getItem().getName());
             //System.out.println("item gross is = " + bi.getGrossValue());
-
             billGross += bi.getGrossValue();
             billNet += bi.getNetValue();
             billDiscount += bi.getDiscount();
@@ -2070,7 +2105,6 @@ public class BillController implements Serializable {
         reminingCashPaid = cashPaid;
 
         for (BillEntry be : billEntrys) {
-
 
             if ((reminingCashPaid != 0.0) || !getSessionController().getLoggedPreference().isPartialPaymentOfOpdPreBillsAllowed()) {
 

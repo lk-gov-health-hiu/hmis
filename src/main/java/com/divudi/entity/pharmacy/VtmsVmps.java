@@ -27,11 +27,13 @@ public class VtmsVmps implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne
-    Vtm vtm;     
+    Vtm vtm;
     @ManyToOne
     Vmp vmp;
     @ManyToOne
     MeasurementUnit strengthUnit;
+    @ManyToOne
+    private MeasurementUnit issueUnit;
     double strength;
     //Created Properties
     @ManyToOne
@@ -55,14 +57,13 @@ public class VtmsVmps implements Serializable {
     public void setPharmaceuticalItemCategory(Category pharmaceuticalItemCategory) {
         this.pharmaceuticalItemCategory = pharmaceuticalItemCategory;
     }
-    
 
-    
-    
     public WebUser getCreater() {
         return creater;
     }
 
+    
+    
     public void setCreater(WebUser creater) {
         this.creater = creater;
     }
@@ -107,8 +108,6 @@ public class VtmsVmps implements Serializable {
         this.retireComments = retireComments;
     }
 
-    
-    
     public Vtm getVtm() {
         return vtm;
     }
@@ -141,8 +140,6 @@ public class VtmsVmps implements Serializable {
         this.strength = strength;
     }
 
-    
-    
     public Long getId() {
         return id;
     }
@@ -160,7 +157,7 @@ public class VtmsVmps implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof VtmsVmps)) {
             return false;
         }
@@ -174,5 +171,13 @@ public class VtmsVmps implements Serializable {
     @Override
     public String toString() {
         return "com.divudi.entity.pharmacy.VtmsVmps[ id=" + id + " ]";
+    }
+
+    public MeasurementUnit getIssueUnit() {
+        return issueUnit;
+    }
+
+    public void setIssueUnit(MeasurementUnit issueUnit) {
+        this.issueUnit = issueUnit;
     }
 }

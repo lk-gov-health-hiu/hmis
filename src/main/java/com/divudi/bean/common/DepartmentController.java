@@ -107,6 +107,14 @@ public class DepartmentController implements Serializable {
         return items;
     }
 
+    public Department getByCoreAppId(Long id) {
+        String sql = "Select d From Department d "
+                + " where d.retired=false"
+                + " and d.coreAppId=:id";
+        HashMap hm = new HashMap();
+        hm.put("id", id);
+        return getFacade().findFirstBySQL(sql, hm);
+    }
 
     public List<Department> listAllDepatrments() {
         List<Department> departments;

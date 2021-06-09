@@ -9,6 +9,7 @@
 package com.divudi.bean.common;
 
 import com.divudi.entity.BillItem;
+import com.divudi.facade.BillItemFacade;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
@@ -18,7 +19,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 import javax.inject.Named;
+import org.eclipse.persistence.exceptions.ValidationException;
 
 /**
  *
@@ -29,11 +32,25 @@ import javax.inject.Named;
 @SessionScoped
 public class BillItemController implements Serializable {
 
+    @Inject
+    private BillItemFacade facade;
+
     private List<BillItem> items = null;
     private BillItem selected;
 
     public List<BillItem> getItems() {
         return items;
+    }
+
+    public void save(BillItem b) {
+        if (b == null) {
+            return;
+        }
+        if (b.getId() == null) {
+            getFacade().create(b);
+        } else {
+            getFacade().edit(b);
+        }
     }
 
     public void setItems(List<BillItem> items) {
@@ -61,6 +78,10 @@ public class BillItemController implements Serializable {
             }
         }
         return null;
+    }
+
+    public BillItemFacade getFacade() {
+        return facade;
     }
 
     @FacesConverter("temBillItemConverter")

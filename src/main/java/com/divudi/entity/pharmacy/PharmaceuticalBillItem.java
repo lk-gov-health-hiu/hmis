@@ -52,7 +52,23 @@ public class PharmaceuticalBillItem implements Serializable {
     Stock stock;
     @ManyToOne
     private Stock staffStock;
-
+    
+    private Double dose;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private MeasurementUnit doseUnit;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private MeasurementUnit frequencyUnit;
+    private Double duration;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private MeasurementUnit durationUnit;
+    private Double issueQty;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private MeasurementUnit issueUnit;
+    @Lob
+    private String comments;
+    @Lob
+    private String prescriptionText;
+    
     @ManyToOne
     Category make;
     String model;
@@ -298,6 +314,8 @@ public class PharmaceuticalBillItem implements Serializable {
     public ItemBatch getItemBatch() {
         return itemBatch;
     }
+    
+    
 
     public void setItemBatch(ItemBatch itemBatch) {
         this.itemBatch = itemBatch;
@@ -500,6 +518,78 @@ public class PharmaceuticalBillItem implements Serializable {
 
     public void setMake(Category make) {
         this.make = make;
+    }
+
+    public Double getDose() {
+        return dose;
+    }
+
+    public void setDose(Double dose) {
+        this.dose = dose;
+    }
+
+    public MeasurementUnit getDoseUnit() {
+        return doseUnit;
+    }
+
+    public void setDoseUnit(MeasurementUnit doseUnit) {
+        this.doseUnit = doseUnit;
+    }
+
+    public MeasurementUnit getFrequencyUnit() {
+        return frequencyUnit;
+    }
+
+    public void setFrequencyUnit(MeasurementUnit frequencyUnit) {
+        this.frequencyUnit = frequencyUnit;
+    }
+
+    public Double getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Double duration) {
+        this.duration = duration;
+    }
+
+    public MeasurementUnit getDurationUnit() {
+        return durationUnit;
+    }
+
+    public void setDurationUnit(MeasurementUnit durationUnit) {
+        this.durationUnit = durationUnit;
+    }
+
+    public Double getIssueQty() {
+        return issueQty;
+    }
+
+    public void setIssueQty(Double issueQty) {
+        this.issueQty = issueQty;
+    }
+
+    public MeasurementUnit getIssueUnit() {
+        return issueUnit;
+    }
+
+    public void setIssueUnit(MeasurementUnit issueUnit) {
+        this.issueUnit = issueUnit;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public String getPrescriptionText() {
+        return prescriptionText;
+    }
+
+    public void setPrescriptionText(String prescriptionText) {
+        this.prescriptionText = prescriptionText;
     }
 
 }

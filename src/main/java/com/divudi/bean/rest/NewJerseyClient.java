@@ -26,7 +26,7 @@ import javax.ws.rs.client.WebTarget;
 public class NewJerseyClient {
     private WebTarget webTarget;
     private Client client;
-    private static final String BASE_URI = "https://hims.health.gov.lk/data";
+    private static final String BASE_URI = "https://chims.health.gov.lk/chims/data";
 
     public NewJerseyClient() {
         client = javax.ws.rs.client.ClientBuilder.newBuilder().sslContext(getSSLContext()).build();

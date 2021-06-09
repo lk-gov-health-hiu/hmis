@@ -1802,11 +1802,11 @@ public class PharmacyItemExcelManager implements Serializable {
             return "";
         }
     }
-    
+
     public void tnametoName() {
         List<Amp> amps = getAmpFacade().findAll();
-        for(Amp a:amps){
-            if(a.getSname()!=null && !a.getSname().trim().equals("")){
+        for (Amp a : amps) {
+            if (a.getSname() != null && !a.getSname().trim().equals("")) {
                 a.setTname(a.getName());
                 a.setName(a.getSname());
                 getAmpFacade().edit(a);
@@ -1886,10 +1886,9 @@ public class PharmacyItemExcelManager implements Serializable {
         }
     }
 
-    
     private List<Amp> updatingAmps;
     private List<Amp> allAmps;
-    
+
 //    public String importCorrectNameFromSnapshot() {
 //        //System.out.println("importing to excel");
 //        String strId;
@@ -1990,7 +1989,6 @@ public class PharmacyItemExcelManager implements Serializable {
 //            getAmpFacade().edit(a);
 //        }
 //    }
-    
     public String importFindMissingNames() {
         String name;
         String code;
@@ -3086,6 +3084,4 @@ public class PharmacyItemExcelManager implements Serializable {
         this.allAmps = allAmps;
     }
 
-    
-    
 }

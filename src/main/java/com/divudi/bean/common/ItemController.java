@@ -154,6 +154,15 @@ public class ItemController implements Serializable {
         return null;
     }
 
+    public Item getByCoreAppId(Long id) {
+        String j = "select i "
+                + " from Item i "
+                + " where i.coreAppId=:id";
+        Map m = new HashMap();
+        m.put("id", id);
+        return getFacade().findFirstBySQL(j, m);
+    }
+
     public List<Item> findInvestigationSampleComponents(Investigation ix) {
         if (ix == null) {
             JsfUtil.addErrorMessage("Select an investigation");
@@ -1126,8 +1135,8 @@ public class ItemController implements Serializable {
             getFacade().edit(i);
         }
     }
-    
-     public void toggleItemIctiveInactiveState() {
+
+    public void toggleItemIctiveInactiveState() {
         String j = "select i from Item i";
         List<Item> tis = getFacade().findBySQL(j);
         for (Item i : tis) {
@@ -1418,14 +1427,13 @@ public class ItemController implements Serializable {
      * @return
      */
     public List<Item> getItems() {
-        if(items==null){
+        if (items == null) {
             fillItemsWithInvestigationsAndServices();
         }
         return items;
     }
 
-    
-    public void fillItemsWithInvestigationsAndServices(){
+    public void fillItemsWithInvestigationsAndServices() {
         String temSql;
         HashMap h = new HashMap();
         temSql = "SELECT i FROM Item i where (type(i)=:t1 or type(i)=:t2 ) and i.retired=false order by i.department.name";
@@ -1433,7 +1441,7 @@ public class ItemController implements Serializable {
         h.put("t2", Service.class);
         items = getFacade().findBySQL(temSql, h, TemporalType.TIME);
     }
-    
+
     public List<Item> getInwardItems() {
         String temSql;
         HashMap h = new HashMap();
