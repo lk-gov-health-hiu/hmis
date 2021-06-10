@@ -92,7 +92,7 @@
             </p:submenu>
 
 
-            <p:submenu styleClass="rightBordrOnly" label="Reports"  rendered="#{webUserController.hasPrivilege('Reports')}">
+            <p:submenu styleClass="rightBordrOnly" label="Reports"  >
                 <p:menuitem  ajax="false" action="/pharmacy/pharmacy_search"  value="Search" actionListener="#{billSearch.recreateModel}" rendered="#{webUserController.hasPrivilege('PharmacySearch')}" ></p:menuitem>                                  
                 <p:menuitem  ajax="false" action="/pharmacy/pharmacy_reports_index"  value="Reports" rendered="#{webUserController.hasPrivilege('PharmacyReports')}" ></p:menuitem>
                 <p:menuitem  ajax="false" action="/pharmacy/pharmacy_summery_index"  value="Summeries" rendered="#{webUserController.hasPrivilege('PharmacySummery')}" ></p:menuitem>                                    
